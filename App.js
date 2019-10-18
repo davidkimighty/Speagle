@@ -14,6 +14,31 @@ class SayHi extends Component {
     );
   }
 }
+
+class Blink extends Component {
+  componentDidMount(){
+    // Toggle the state every second
+    setInterval(() => (
+      this.setState(previousState => (
+        { isShowingText: !previousState.isShowingText }
+      ))
+    ), 1000);
+  }
+
+  //state object
+  state = { isShowingText: true };
+
+  render() {
+    if (!this.state.isShowingText) {
+      return null;
+    }
+
+    return (
+      <Text>{this.props.text}</Text>
+    );
+  }
+}
+
 export default class GreetingPeople extends Component {
   render() {
     let picture = { uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' };
@@ -22,6 +47,8 @@ export default class GreetingPeople extends Component {
         <SayHi firstname='Hyunwoo' lastname='Kim' />
         <SayHi firstname='Dapea' lastname='Mo' />
         <SayHi image={picture} />
+
+        <Blink text='Blink Test' />
       </View>
     );
   }
