@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Image } from 'react-native';
-// We are making our custom component to make use of it everywhere we want 
+import { AppRegistry, Text, View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  bigBlue: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  red: {
+    color: 'red',
+  },
+});
+
 class SayHi extends Component {
   render() {
     return (
@@ -33,7 +44,6 @@ class Blink extends Component {
       ))
     ), 1000);
   }
-
   //state object
   state = { isShowingText: true };
 
@@ -41,7 +51,7 @@ class Blink extends Component {
     if (!this.state.isShowingText) return null;
     return (
       <View>
-        <Text>{this.props.text}</Text>
+        <Text style={[styles.bigBlue, styles.red]}>{this.props.text}</Text>
       </View> 
     );
   }
