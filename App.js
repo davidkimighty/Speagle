@@ -6,8 +6,17 @@ class SayHi extends Component {
     return (
       <View>
         <Text>Hello, {this.props.firstname} {this.props.lastname}</Text>
+      </View>
+    );
+  }
+}
+
+class ShowImage extends Component {
+  render() {
+    return (
+      <View>
         <Image
-          style={{width: 50, height: 50}}
+          style={{width: 100, height: 100}}
           source={this.props.image}
         />
       </View>
@@ -29,12 +38,11 @@ class Blink extends Component {
   state = { isShowingText: true };
 
   render() {
-    if (!this.state.isShowingText) {
-      return null;
-    }
-
+    if (!this.state.isShowingText) return null;
     return (
-      <Text>{this.props.text}</Text>
+      <View>
+        <Text>{this.props.text}</Text>
+      </View> 
     );
   }
 }
@@ -46,8 +54,7 @@ export default class GreetingPeople extends Component {
       <View style={{justifyContent: 'center',alignItems: 'center', flex:1}}>
         <SayHi firstname='Hyunwoo' lastname='Kim' />
         <SayHi firstname='Dapea' lastname='Mo' />
-        <SayHi image={picture} />
-
+        <ShowImage image={picture} />
         <Blink text='Blink Test' />
       </View>
     );
