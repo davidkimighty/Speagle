@@ -61,7 +61,7 @@ export default class GreetingPeople extends Component {
   render() {
     let picture = { uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' };
     return (
-      <View style={{justifyContent: 'center',alignItems: 'center', flex:1}}>
+      <View style={{justifyContent: 'center',alignItems: 'center', flex:1, backgroundColor: '#6ED4C8'}}>
         <SayHi firstname='Hyunwoo' lastname='Kim' />
         <SayHi firstname='Dapea' lastname='Mo' />
         <ShowImage image={picture} />
