@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Image, StyleSheet, TextInput } from 'react-native';
+import {
+  AppRegistry,
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TextInput,
+  Button,
+  ScrollView,
+  FlatList,
+  SectionList
+} from 'react-native';
 
 class SayHi extends Component {
   render() {
@@ -78,11 +89,44 @@ class PizzaTranslator extends Component {
   }
 }
 
+class ButtonBasics extends Component {
+  _onPressButton() {
+    alert('You tapped the button!')
+  }
+
+  render() {
+    return (
+      <View style={btnStyles.container}>
+        <View style={btnStyles.buttonContainer}>
+          <Button 
+            onPress={this._onPressButton}
+            title="Press Me"
+          />
+        </View>
+        <View style={btnStyles.buttonContainer}>
+          <Button
+            backgroundColor='red'
+            onPress={this._onPressButton}
+            title="Press Me"
+            color="red"
+          />
+        </View>
+      </View>
+    );
+  }
+
+}
+
 export default class GreetingPeople extends Component {
   render() {
     let picture = { uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' };
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={{
+        flex: 1,
+        paddingTop: 30,
+        margin: 40,
+        backgroundColor: 'white'
+      }}>
         <View style={styles.firstrow}>
           <Text style={styles.title}>Flex</Text>
         </View>
@@ -92,12 +136,25 @@ export default class GreetingPeople extends Component {
         </View>
         <View style={styles.thirdrow}>
           <Blink text='Blink Test' />
+          <ButtonBasics />
         </View>
         <View style={styles.forthrow}>
           <ShowImage image={picture} />
           <PizzaTranslator />
+          
         </View>
-      </View>
+        <View style={listStyles.container}>
+            <SectionList
+              sections={[
+                {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
+                {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+              ]}
+              renderItem={({item}) => <Text style={listStyles.item}>{item}</Text>}
+              renderSectionHeader={({section}) => <Text style={listStyles.sectionHeader}>{section.title}</Text>}
+              keyExtractor={(item, index) => index}
+            />
+          </View>
+      </ScrollView>
     );
   }
 }
@@ -158,3 +215,35 @@ const styles = StyleSheet.create({
     fontSize: 40
   }
 });
+
+const btnStyles = StyleSheet.create({
+  container: {
+   flex: 1,
+   justifyContent: 'center',
+  },
+  buttonContainer: {
+    margin: 0,
+    backgroundColor: 'orange'
+  }
+});
+
+const listStyles = StyleSheet.create({
+  container: {
+   flex: 1,
+   paddingTop: 22
+  },
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+})
