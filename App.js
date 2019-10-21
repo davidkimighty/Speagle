@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Image, StyleSheet } from 'react-native';
+import { AppRegistry, Text, View, Image, StyleSheet, TextInput } from 'react-native';
 
 class SayHi extends Component {
   render() {
@@ -55,6 +55,29 @@ class Blink extends Component {
   }
 }
 
+class PizzaTranslator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+
+  render() {
+    return (
+      <View style={{padding: 10}}>
+        <TextInput
+          style={{height: 40}}
+          placeholder="Type here to translate!"
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
+      </View>
+    );
+  }
+}
+
 export default class GreetingPeople extends Component {
   render() {
     let picture = { uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' };
@@ -72,6 +95,7 @@ export default class GreetingPeople extends Component {
         </View>
         <View style={styles.forthrow}>
           <ShowImage image={picture} />
+          <PizzaTranslator />
         </View>
       </View>
     );
