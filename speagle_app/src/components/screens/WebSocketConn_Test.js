@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
+import WS from 'react-native-websocket'
+
 
 
 class ButtonBasics extends Component {
@@ -34,8 +36,27 @@ class ButtonBasics extends Component {
 class WebSocketConn_Test extends Component {
     render () {
         return (
+            // <View style={{flex: 1}}>
+            //     <ButtonBasics />
+            // </View>
+
             <View style={{flex: 1}}>
-                <ButtonBasics />
+                <WS
+                    ref={ref => {this.ws = ref}}
+                    url='ws://localhost:8000/ws/chat/bob/'
+                    onOpen={() => {
+                        
+                        this.ws.send(
+                            JSON.stringify({
+                                'message': 'hello from client'
+                            })
+                        )
+                    }}
+                    onMessage={console.log}
+                    onError={console.log}
+                    onClose={console.log}
+                    reconnect // Will try to reconnect onClose
+                />
             </View>
         )
     }
